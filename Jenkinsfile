@@ -80,7 +80,7 @@ pipeline {
     stage('deploy to kubernetes') {
       steps {
         sh '''
-          kubectl apply -f deployment.yaml
+          kubectl apply -f deployment.yml
           kubectl rollout status deployment/zomato-deployment
         '''
       }
