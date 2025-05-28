@@ -56,8 +56,8 @@ pipeline {
       steps {
         script {
           sh """
-            docker tag zomato ${DOCKERHUB_USERNAME}/zomato
-            docker push ${DOCKERHUB_USERNAME}/zomato
+            docker tag zomato ${DOCKERHUB_USERNAME}/zomato:latest
+            docker push ${DOCKERHUB_USERNAME}/zomato:latest
           """
         }
       }
@@ -65,7 +65,7 @@ pipeline {
     stage('remove docker image locally') {
       steps {
         sh """
-          docker rmi ${DOCKERHUB_USERNAME}/zomato
+          docker rmi ${DOCKERHUB_USERNAME}/zomato:latest
         """
       }
     }
