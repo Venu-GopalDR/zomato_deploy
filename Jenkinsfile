@@ -77,11 +77,18 @@ pipeline {
         """
       }
     }
+    stage('Use Kubeconfig') {
+      steps {
+        withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
+          sh 'kubectl get pods --kubeconfig=$KUBECONFIG'
+        }
+      }
+    }
     stage('deploy to kubernetes') {
       steps {
         sh '''
           kubectl apply -f deployment.yml
-          kubectl rollout status deployment/zomato-deployment
+          kubectl rollout status deployment/zomato
         '''
       }
     }
