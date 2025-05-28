@@ -69,14 +69,6 @@ pipeline {
         """
       }
     }
-    stage('stop and restart local docker container') {
-      steps {
-        sh """
-          docker rm -f app || true
-          docker run -d -p 8081:8080 --name app ${DOCKERHUB_USERNAME}/zomato
-        """
-      }
-    }
     stage('Use Kubeconfig') {
       steps {
         withCredentials([file(credentialsId: 'kubeconfig', variable: 'KUBECONFIG')]) {
